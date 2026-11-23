@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课程详情页生成工具 · 上手 SOP</title>
+<style>
+  :root{
+    --paper:#fcfaf1;
+    --paper-soft:#f6f2e4;
+    --ink:#304e41;
+    --ink-light:#5b7264;
+    --soft:#718274;
+    --line:#dfd8c4;
+    --accent:#c9a227;
+    --accent-soft:#f4e7b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16px;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:56px 28px 96px;}
+  header.top{border-bottom:1px solid var(--line);padding-bottom:36px;margin-bottom:44px;}
+  .eyebrow{font-size:12px;letter-spacing:.22em;color:var(--soft);text-transform:uppercase;margin-bottom:14px;}
+  h1{font-size:34px;line-height:1.35;margin:0 0 16px;font-weight:600;letter-spacing:-.01em;}
+  .lede{font-size:16px;color:var(--ink-light);margin:0;max-width:640px;}
+  .meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;}
+  .meta span{font-size:12px;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:#fff;}
+  nav.toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin:0 0 48px;}
+  nav.toc b{display:block;font-size:13px;letter-spacing:.12em;color:var(--soft);margin-bottom:12px;}
+  nav.toc ol{margin:0;padding-left:20px;font-size:14px;}
+  nav.toc li{margin:6px 0;}
+  nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px dashed transparent;}
+  nav.toc a:hover{border-bottom-color:var(--soft);}
+  section{margin-bottom:52px;}
+  h2{font-size:23px;margin:0 0 10px;font-weight:600;letter-spacing:-.01em;}
+  h2 .num{display:inline-block;font-size:12px;color:#fff;background:var(--ink);border-radius:6px;padding:2px 9px;margin-right:11px;vertical-align:2px;font-weight:500;}
+  h3{font-size:17px;margin:32px 0 8px;font-weight:600;}
+  p{margin:12px 0;}
+  .muted{color:var(--ink-light);font-size:14.5px;}
+  .note{background:var(--paper-soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;font-size:14.5px;}
+  .note b{color:var(--ink);}
+  .warn{background:#fdf2f0;border-left:3px solid #d98f83;border-radius:0 10px 10px 0;padding:16px 20px;margin:20px 0;font-size:14.5px;}
+  img.shot{width:100%;display:block;border:1px solid var(--line);border-radius:12px;margin:18px 0 8px;background:#fff;}
+  .cap{font-size:12.5px;color:var(--soft);text-align:center;margin:0 0 28px;}
+  .step{border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:18px 0;background:#fff;}
+  .step .tag{display:inline-block;font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.08em;margin-bottom:8px;}
+  .step h4{margin:0 0 10px;font-size:16.5px;font-weight:600;}
+  .step ol,.step ul{margin:8px 0 0;padding-left:22px;font-size:15px;}
+  .step li{margin:5px 0;}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:18px 0;background:#fff;}
+  th,td{border:1px solid var(--line);padding:10px 13px;text-align:left;vertical-align:top;}
+  th{background:var(--paper-soft);font-weight:600;font-size:13.5px;color:var(--ink);}
+  td code{background:var(--paper-soft);padding:1px 6px;border-radius:5px;font-size:13px;}
+  .faq{border-top:1px solid var(--line);padding-top:20px;margin-top:20px;}
+  .faq h4{margin:20px 0 6px;font-size:15.5px;color:var(--ink);}
+  .faq p{margin:0;font-size:14.5px;color:var(--ink-light);}
+  footer{border-top:1px solid var(--line);padding-top:24px;color:var(--soft);font-size:13px;}
+  @media (max-width:600px){
+    .wrap{padding:36px 18px 64px;}
+    h1{font-size:26px;}
+    h2{font-size:20px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">SOP · 课程详情页生成工具</div>
+  <h1>用这个工具，10 分钟做一张能直接上架的课程详情长图</h1>
+  <p class="lede">这份文档写给第一次接手的同事。不需要懂代码、不需要装软件，按顺序走一遍就能独立完成一张详情页；遇到排版小问题，最后有专门的处理办法。</p>
+  <div class="meta">
+    <span>适用：课程运营 / 教研</span>
+    <span>单张耗时：约 10 分钟</span>
+    <span>零安装 · 浏览器直接用</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <b>目录</b>
+  <ol>
+    <li><a href="#what">这个工具解决什么问题</a></li>
+    <li><a href="#open">开始之前：打开工具、备好素材</a></li>
+    <li><a href="#ui">认识界面：左边填、右边看</a></li>
+    <li><a href="#fill">按顺序填九个板块</a></li>
+    <li><a href="#export">生成、检查、导出</a></li>
+    <li><a href="#check">交付前的自检清单</a></li>
+    <li><a href="#faq">常见问题与排版小坑</a></li>
+    <li><a href="#field">附：字段速查表</a></li>
+  </ol>
+</nav>
+
+<section id="what">
+  <h2><span class="num">01</span>这个工具解决什么问题</h2>
+  <p>课程上架的详情页，是把「为什么要学、学完能得到什么、讲什么、谁来讲、课程目录、团队、福利、购买须知」这些固定板块排成一张长图。以前是纯手工排版，一张要花大半天，而且每个字的位置、每块留白都得对着规则调。</p>
+  <p>这个工具把这套排版规则固化下来了：你只负责往表单里填文案和图片，版式由它自动排。填完点一下，右边立刻能看到成品长什么样；确认没问题，直接导出图片就能用，<strong>不需要再回设计软件改任何东西</strong>。</p>
+  <p class="muted">下面是它生成出来的成品效果（节选，可点开看大图）：</p>
+  <a href="images/detail-full.jpg" target="_blank" rel="noopener"><img class="shot" src="images/detail-full.jpg" alt="工具生成的课程详情长图成品"></a>
+  <p class="cap">成品长图：标题高亮、模块分隔、讲师与目录排版都由规则自动完成</p>
+  <div class="note"><b>一句话记住它：</b>你只管填内容，排版不归你管。凡是「看起来没对齐、字太大、留白怪」的问题，先别手动改，去看第 7 节的说明。</div>
+</section>
+
+<section id="open">
+  <h2><span class="num">02</span>开始之前：打开工具、备好素材</h2>
+
+  <div class="step">
+    <span class="tag">STEP 1</span>
+    <h4>打开工具</h4>
+    <ol>
+      <li>用浏览器打开这个页面：<a href="../detail/" target="_blank" rel="noopener">在线版编辑器</a>（推荐 Chrome 或 Edge）。</li>
+      <li>如果拿到的是本地文件，直接双击 <code>editor.html</code> 也能打开，效果一样。</li>
+      <li>打开后如果页面很长、内容都在，说明加载正常；等右侧预览出现图，就可以开始填。</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <span class="tag">STEP 2</span>
+    <h4>先把素材备齐（省一半时间）</h4>
+    <ul>
+      <li><strong>文案</strong>：九个板块的文字，提前写在一个文档里，按板块顺序排好。</li>
+      <li><strong>图片</strong>：抢先看配图、讲师头像、团队成员头像，统一放一个文件夹。</li>
+      <li><strong>格式要求</strong>：图片用 jpg 或 png；讲师头像尽量用正面、方形、背景干净的图，否则右侧预览里会明显歪。</li>
+    </ul>
+    <p class="muted">素材没齐也可以先填文字，图片留空，最后统一补——但补图会让预览重新排一次，越晚补越容易漏。</p>
+  </div>
+</section>
+
+<section id="ui">
+  <h2><span class="num">03</span>认识界面：左边填、右边看</h2>
+  <img class="shot" src="images/editor-overview.png" alt="编辑器界面：左侧九个板块与表单，右侧实时预览">
+  <p class="cap">界面全貌：左侧编辑区，右侧实时预览，底部三个操作按钮</p>
+
+  <p>整个界面就三块，弄懂这三块就够了：</p>
+  <table>
+    <tr><th style="width:22%">位置</th><th style="width:38%">是什么</th><th>你要做什么</th></tr>
+    <tr><td><strong>左侧顶部</strong></td><td>九个竖排板块标签</td><td>点哪个，下面就显示哪个板块的填写框。当前板块会变成黄底。</td></tr>
+    <tr><td><strong>左侧中间</strong></td><td>当前板块的表单</td><td>按字段往里填文字、传图片。带「删除」的是可删条目，带「+ 添加」的是可加条目。</td></tr>
+    <tr><td><strong>左侧底部</strong></td><td>三个按钮</td><td><strong>生成详情页</strong>（黄色）→ <strong>导出为图片下载</strong>（黑色）→ <strong>在新标签页中打开</strong>（蓝色）。</td></tr>
+    <tr><td><strong>右侧整块</strong></td><td>实时预览</td><td>不用管，它是结果。你改左边，它跟着变。</td></tr>
+  </table>
+
+  <div class="note"><b>别慌的点：</b>右侧预览很长，要往下滚才能看全，这是正常的——详情页本来就是一张长图。预览里看到的比例，就是导出的比例。</div>
+</section>
+
+<section id="fill">
+  <h2><span class="num">04</span>按顺序填九个板块</h2>
+  <p>建议照下面这个顺序填，因为前面的板块决定后面的语气和结构。每个板块点左侧标签切换，填完再点下一块。</p>
+
+  <h3>① 为什么要学</h3>
+  <p>填这个课程的「钩子」：学员为什么现在必须学、不学会怎样。一段就够，不要写成分点大纲。这段文字在成品里会配一句高亮标题，所以<strong>第一句要能独立站住</strong>。</p>
+
+  <h3>② 你将会收获</h3>
+  <img class="shot" src="images/panel-harvest.png" alt="你将会收获板块：收获条目、标题、描述与添加按钮">
+  <p class="cap">收获板块：每条一个「标题 + 描述」，默认三条，可增可删</p>
+  <ul>
+    <li>每一条填 <strong>标题</strong>（短，4–10 字）和 <strong>描述</strong>（一到两句，说清具体能获得什么）。</li>
+    <li>默认给了 3 条，不够点「+ 添加收获」，多了点条目右上角「删除」。</li>
+    <li>标题之间要平行：都是动宾结构，或都是名词短语，不要一条「掌握方法」一条「很厉害」。</li>
+  </ul>
+
+  <h3>③ 精彩抢先看</h3>
+  <p>填一段<strong>介绍文案</strong>，再用「选择图片（支持 jpg/png）」传一张能代表课程质感的图。传错了点「清空图片」重来。</p>
+  <p class="muted">这张图在成品里是视觉重心，尽量选清晰、有信息量的；纯装饰图会显得空。</p>
+
+  <h3>④ 大家这样说</h3>
+  <p>学员评价，默认 3 条，每条三个字段：<strong>评价内容</strong>、<strong>署名</strong>、<strong>学分/职位</strong>。月底不够点「+ 添加评价」。</p>
+  <div class="warn"><b>注意：</b>评价内容要真实可用，别写「这门课太好了」这种空话；署名和职位不要出现真实姓名，用「某公司 · 岗位 · 第 N 期学员」这类写法。</div>
+
+  <h3>⑤ 课程主理人</h3>
+  <p>四个字段：<strong>讲师姓名</strong>、<strong>标签</strong>（多个标签用竖线 <code>|</code> 分隔）、<strong>详细介绍</strong>、讲师头像。</p>
+  <ul>
+    <li>标签控制在 2–3 个，多了在成品里会挤成一行。</li>
+    <li>详细介绍写背景经历、专业领域、代表性成果，不要写成简历罗列。</li>
+    <li>头像点「选择头像」上传；不合适点「清除头像」重传。<strong>头像要和两侧标准线对齐</strong>，所以务必用正面、方正的图。</li>
+  </ul>
+
+  <h3>⑥ 课程目录</h3>
+  <img class="shot" src="images/panel-catalog.png" alt="课程目录板块：课程总名称、模块标题与课程列表">
+  <p class="cap">目录板块：先填表头总名称，再逐个模块填「模块标题 + 课程列表」</p>
+  <ul>
+    <li><strong>课程总名称（表头）</strong>：整张目录的总标题，只填一次。</li>
+    <li><strong>模块标题</strong>：如「模块一：基础认知与思维升级」，建议带序号，成品才整齐。</li>
+    <li><strong>课程列表</strong>：<strong>每行一个讲次</strong>，直接换行就分条，不要用逗号堆在一行。</li>
+    <li>默认 4 个模块，不够点「+ 添加模块」。讲次少的模块可以只写两三行，不用凑满。</li>
+  </ul>
+  <div class="warn"><b>最容易出错的地方：</b>课程列表必须是「一行一讲」。如果写成一整段，成品里会变成一坨，而且很难看出这是目录。</div>
+
+  <h3>⑦ 研发团队</h3>
+  <p>每个成员填 <strong>姓名</strong>（可用花名或岗位名）和 <strong>职位</strong>，默认 5 位，可增删。职位写职能，比如产品经理、课程设计、内容研发、视觉设计、运营支持。</p>
+
+  <h3>⑧ 重磅福利</h3>
+  <p>一段福利介绍文案。说清楚给什么、值多少、怎么领，别写成促销口号。</p>
+
+  <h3>⑨ 购买须知</h3>
+  <p>逐条列购买规则，默认 5 条，可增删。每条只讲一件事：包含什么、怎么用券、在哪看课、能否退换、找谁咨询。</p>
+  <div class="note"><b>顺序建议：</b>这一块放在最后填，因为前面填完你才知道这期课到底包含什么、有什么限制，避免自相矛盾。</div>
+</section>
+
+<section id="export">
+  <h2><span class="num">05</span>生成、检查、导出</h2>
+
+  <div class="step">
+    <span class="tag">STEP 3</span>
+    <h4>生成</h4>
+    <p>九个板块都填完，点黄色的<strong>「生成详情页」</strong>。右侧预览会按最新内容重排一遍。</p>
+  </div>
+
+  <div class="step">
+    <span class="tag">STEP 4</span>
+    <h4>整页检查（重点看四处）</h4>
+    <ol>
+      <li>从上到下滚一遍，看有没有<strong>板块缺失</strong>或顺序错乱。</li>
+      <li>看<strong>图片有没有加载出来</strong>，头像是否变形。</li>
+      <li>看文字有没有<strong>一行只剩一两个字</strong>的断行（处理方法见第 7 节）。</li>
+      <li>看目录的讲次是不是一行一条。</li>
+    </ol>
+  </div>
+
+  <div class="step">
+    <span class="tag">STEP 5</span>
+    <h4>导出或整页查看</h4>
+    <ul>
+      <li>点黑色<strong>「导出为图片下载」</strong>：直接把整张长图存成图片，用于上架。</li>
+      <li>点蓝色<strong>「在新标签页中打开」</strong>：在新页面看完整长图，适合截图或发给同事确认。</li>
+    </ul>
+    <p class="muted">两个按钮可以都用：先「新标签页」确认无误，再「导出下载」拿文件。</p>
+  </div>
+</section>
+
+<section id="check">
+  <h2><span class="num">06</span>交付前的自检清单</h2>
+  <p>导出的图在发出去之前，按这张清单过一遍，能挡掉绝大多数返工：</p>
+  <table>
+    <tr><th style="width:34%">检查项</th><th>合格标准</th></tr>
+    <tr><td>九个板块齐全</td><td>为什么要学 / 收获 / 抢先看 / 评价 / 主理人 / 目录 / 团队 / 福利 / 须知，一个不缺</td></tr>
+    <tr><td>课程名称一致</td><td>表头、正文、目录里出现的课程名完全一致，没有旧版残留</td></tr>
+    <tr><td>图片全部显示</td><td>没有空白框、没有裂图，头像未变形</td></tr>
+    <tr><td>目录一行一讲</td><td>每个讲次独立成行，模块标题带序号</td></tr>
+    <tr><td>无孤儿字</td><td>没有一行只剩一两个字（有就见第 7 节）</td></tr>
+    <tr><td>信息不越界</td><td>无真实学员姓名、无内部人员信息、无未公开价格</td></tr>
+    <tr><td>尺寸正确</td><td>导出图为竖版长图，宽度与上架位要求一致</td></tr>
+  </table>
+</section>
+
+<section id="faq">
+  <h2><span class="num">07</span>常见问题与排版小坑</h2>
+
+  <div class="faq">
+    <h4>Q1：某一行只剩一两个字，看着很难受</h4>
+    <p>这是文字长度和版心宽度撞上了。两个办法：① 微调这段文案，删掉一两个字或补一句话，让它自然换行；② 需要精调字间距时，在浏览器里按 <code>F12</code> 打开开发者工具，选中那段文字，微调 <code>letter-spacing</code> 数值，看预览效果合适了再改回文案里。改完记得重点看这一段，别影响上下版块。</p>
+
+    <h4>Q2：右侧预览的图和最后导出的一致吗</h4>
+    <p>一致。导出就是把右侧预览整页渲染成图片，比例、字体、间距都是同一套规则。所以<strong>在预览里看到的问题，导出后一定存在</strong>，不要抱着「导出可能就好了」的心态。</p>
+
+    <h4>Q3：导出的图片想要更清楚怎么办</h4>
+    <p>浏览器的显示缩放会影响渲染清晰度。把页面缩放调到 100%（<code>Ctrl</code> + <code>0</code>）再导出，效果最稳。如果只需要局部截图，用 <code>Ctrl</code> + <code>Shift</code> + <code>S</code> 调出截图工具选取区域即可。</p>
+
+    <h4>Q4：填错一个板块，会影响其他板块吗</h4>
+    <p>不会。九个板块各自独立，改哪块只影响哪块。所以可以放心来回改，不必从头重填。</p>
+
+    <h4>Q5：换了一期课，怎么最快做出新版</h4>
+    <p>复制上一期的文案文档，先替换课程名、目录、主理人、须知的差异部分，其余沿用。打开工具后按九个板块顺序贴一遍，通常 10 分钟内能出图。</p>
+
+    <h4>Q6：图片传不上去或一直显示「未选择图片」</h4>
+    <p>先确认格式是 jpg 或 png（webp、heic 不行）；再看文件是不是特别大，压到 1MB 以内再试；还不行就换 Chrome 重开页面。</p>
+  </div>
+</section>
+
+<section id="field">
+  <h2><span class="num">08</span>附：九个板块字段速查表</h2>
+  <p class="muted">填的时候对着这张表，就不容易漏字段。</p>
+  <table>
+    <tr><th style="width:20%">板块</th><th style="width:40%">字段</th><th>要点</th></tr>
+    <tr><td>为什么要学</td><td>段落内容</td><td>一段钩子文案，首句要能独立站住</td></tr>
+    <tr><td>你将会收获</td><td>标题 / 描述 / 添加·删除</td><td>3 条起，标题平行、描述具体</td></tr>
+    <tr><td>精彩抢先看</td><td>介绍文案 / 选择图片 / 清空图片</td><td>图片是视觉重心，选清晰有信息量的</td></tr>
+    <tr><td>大家这样说</td><td>评价内容 / 署名 / 学分·职位</td><td>不写真实姓名，署名用角色化写法</td></tr>
+    <tr><td>课程主理人</td><td>讲师姓名 / 标签 / 详细介绍 / 选择头像 / 清除头像</td><td>标签 2–3 个、竖线分隔；头像正面方正</td></tr>
+    <tr><td>课程目录</td><td>课程总名称 / 模块标题 / 课程列表 / 添加模块</td><td>课程列表一行一讲，模块带序号</td></tr>
+    <tr><td>研发团队</td><td>姓名 / 职位 / 添加成员</td><td>职位写职能即可</td></tr>
+    <tr><td>重磅福利</td><td>福利介绍文案</td><td>说清给什么、值多少、怎么领</td></tr>
+    <tr><td>购买须知</td><td>内容 / 添加须知</td><td>一条只讲一件事，最后填避免矛盾</td></tr>
+  </table>
+</section>
+
+<footer>
+  <p>本 SOP 基于工具的实际上手流程整理，配图取自工具真实界面与生成结果。</p>
+  <p>第一次做建议照着走一遍；做过两三次之后，第 4 节的九个板块和第 6 节的自检清单可以单独抽出来当快捷卡用。</p>
+</footer>
+
+</div>
+</body>
+</html>
